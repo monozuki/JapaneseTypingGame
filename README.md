@@ -1,0 +1,1 @@
+A typing game for learning and reviewing kanji readings.
