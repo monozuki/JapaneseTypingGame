@@ -1,11 +1,10 @@
 var playState = {
 	preload: function() {
-		// load the words that will be reviewed here
-		this.review = [
-			['やさい', '野菜'], ['くだもの', '果物'], ['たんすいかぶつ', '炭水化物'], ['とうふ', '豆腐'],
-			['にゅうせいひん', '乳製品'], ['にく', '肉'], ['さかな', '魚'], ['おかし', 'お菓子'], ['みず', '水'],
-			['しにがみはりんごしかたべない', '死神はリンゴしか食べない']
-		];
+		// load the words that will be reviewed
+		this.review = [];
+		Object.keys(game.frequencyListMap).forEach(key => {
+  			this.review.push([key, game.frequencyListMap[key]]);
+		});
 
 		game.stage.disableVisibilityChange = true;
 	}, 
@@ -54,7 +53,7 @@ var playState = {
 		// Delete the rightmost letter or kana
 		game.input.keyboard.addKey(Phaser.KeyCode.BACKSPACE).onDown.add(this.backspacePressed, this);
 
-		game.time.events.repeat(Phaser.Timer.SECOND * 3, 10, this.generateRandomReview, this);
+		game.time.events.repeat(Phaser.Timer.SECOND * 3, 1000, this.generateRandomReview, this);
 
 		//this.generateTarget('野菜', 'やさい');
 		//this.generateTarget('果物', 'くだもの');
@@ -77,8 +76,23 @@ var playState = {
 	/*** Below are functions that we define ***/
 	generateRandomReview: function() {
 		var i = Math.floor(Math.random()*this.review.length);
-		var pair = this.review.splice(i, 1)[0];
-		this.generateTarget(pair[1], pair[0]);
+		var pair = this.review[i];
+		if (this.targets[pair[1]]) { 
+			// We don't allow targets with the same reading 
+			// to be active at the same time.
+			pair = null;
+			for (i = 0; i < this.review.length; i++) {
+				if (!this.targets[this.review[i][1]]) {
+					pair = this.review[i];
+					break;
+				}
+			}
+			if (!pair) {
+				return;
+			}
+		}
+		this.review.splice(i, 1);
+		this.generateTarget(pair[0], pair[1]);
 	}, 
 
 	generateTarget: function(text, reading) {

@@ -4,6 +4,9 @@ var loadState = {
 	},
 
 	create: function() {
-		game.state.start('menu');
+		$.get('assets/frequency-list.txt', function(data) {
+			game.frequencyListMap = JSON.parse(data);
+			game.state.start('menu');
+		});
 	}
 }
