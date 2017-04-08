@@ -2,6 +2,17 @@
   "name": "japanese-typing-game",
   "version": "0.1.0",
   "description": "A typing game for learning and reviewing kanji readings.",
-  "author": "Andrew Jiang",
-  "license": "ISC"
+  "license": "ISC",
+  "author": {
+    "name": "Andrew Jiang"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/monozuki/JapaneseTypingGame.git"
+  },
+  "dependencies": {
+    "fs": "0.0.1-security",
+    "kuromoji": "^0.1.1",
+    "wanakana": "^1.3.7"
+  }
 }

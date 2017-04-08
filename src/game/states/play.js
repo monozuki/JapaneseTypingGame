@@ -54,7 +54,7 @@ var playState = {
 		// Delete the rightmost letter or kana
 		game.input.keyboard.addKey(Phaser.KeyCode.BACKSPACE).onDown.add(this.backspacePressed, this);
 
-		game.time.events.repeat(Phaser.Timer.SECOND * 3, 1000, this.generateRandomReview, this);
+		game.time.events.repeat(Phaser.Timer.SECOND * 3, 10, this.generateRandomReview, this);
 
 		//this.generateTarget('野菜', 'やさい');
 		//this.generateTarget('果物', 'くだもの');
