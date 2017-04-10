@@ -7,15 +7,50 @@
 	<script type="text/javascript" src="lib/phaser.min.js"></script>
 	<script type="text/javascript" src="lib/wanakana.min.js"></script>
 	<script type="text/javascript" src="lib/jquery-3.2.0.min.js"></script>
+	<script type="text/javascript" src="lib/vue.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="lib/element/default-theme.css">
+	<script type="text/javascript" src="lib/element/element.min.js"></script>
+
 	<script type="text/javascript" src="game/states/boot.js"></script>
 	<script type="text/javascript" src="game/states/load.js"></script>
 	<script type="text/javascript" src="game/states/menu.js"></script>
 	<script type="text/javascript" src="game/states/play.js"></script>
-	<script type="text/javascript" src="game/main.js"></script>
 
+	<style type="text/css">
+		#game-container {
+			position: relative;
+		}
+		#phaser {
+			position: absolute;
+		}
+		#overlay {
+			position: absolute;
+			width: 800px;
+			height: 600px;
+			color: white;
+		}
+		#buttons {
+			top: 400px;
+		}
+    </style>
 </head>
 
 <body>
-</body>
 
+	<div id="game-container">
+
+		<div id="phaser"></div>
+
+		<div id="overlay">
+			<el-row id="buttons" type="flex" justify="space-around">
+				<el-button class="grid-content" type="primary" size="large" v-on:click="start">
+					Start
+				</el-button>
+			</el-row>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="game/main.js"></script>
+</body>
 </html>

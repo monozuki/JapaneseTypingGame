@@ -8,18 +8,10 @@ var menuState = {
 			}
 		).anchor.set(0.5);;
 
-		game.add.text(GAME_WIDTH/2, 3*GAME_HEIGHT/4, 'press the "W" key to start',
-			{
-				font: '25px Arial', 
-				fill: '#ffffff'
-			}
-		).anchor.set(0.5);
-
-		var wkey = game.input.keyboard.addKey(Phaser.Keyboard.W);
-		wkey.onDown.add(this.start, this);
 	},
 
 	start: function() {
+		document.querySelector('#overlay').style.display = 'none';
 		game.state.start('play');
 	}
 }

@@ -11,7 +11,6 @@ var playState = {
 
 	create: function() {
 		game.physics.startSystem(Phaser.Physics.ARCADE);
-		game.stage.backgroundColor = '#5d5d5d';
 
 		this.targets = [];
 		this.lives = 3;
@@ -54,10 +53,6 @@ var playState = {
 		game.input.keyboard.addKey(Phaser.KeyCode.BACKSPACE).onDown.add(this.backspacePressed, this);
 
 		game.time.events.repeat(Phaser.Timer.SECOND * 3, 1000, this.generateRandomReview, this);
-
-		//this.generateTarget('野菜', 'やさい');
-		//this.generateTarget('果物', 'くだもの');
-		//this.generateTarget('炭水化物', 'たんすいかぶつ');
 	}, 
 
 	update: function() {
@@ -77,6 +72,7 @@ var playState = {
 	generateRandomReview: function() {
 		var i = Math.floor(Math.random()*this.review.length);
 		var pair = this.review[i];
+		
 		if (this.targets[pair[1]]) { 
 			// We don't allow targets with the same reading 
 			// to be active at the same time.
@@ -91,6 +87,7 @@ var playState = {
 				return;
 			}
 		}
+
 		this.review.splice(i, 1);
 		this.generateTarget(pair[0], pair[1]);
 	}, 
