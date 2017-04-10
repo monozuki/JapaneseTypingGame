@@ -2,9 +2,10 @@ var playState = {
 	preload: function() {
 		// load the words that will be reviewed
 		this.review = [];
-		Object.keys(game.frequencyListMap).forEach(key => {
-  			this.review.push([key, game.frequencyListMap[key]]);
-		});
+		for (let i = 0; i < vue.numEntries; i++) {
+			const pair = game.frequencyList[i];
+			this.review.push([pair[0], pair[1]]);
+		}
 
 		game.stage.disableVisibilityChange = true;
 	}, 
@@ -52,7 +53,7 @@ var playState = {
 		// Delete the rightmost letter or kana
 		game.input.keyboard.addKey(Phaser.KeyCode.BACKSPACE).onDown.add(this.backspacePressed, this);
 
-		game.time.events.repeat(Phaser.Timer.SECOND * 3, 1000, this.generateRandomReview, this);
+		game.time.events.repeat(Phaser.Timer.SECOND * 2, this.review.length, this.generateRandomReview, this);
 	}, 
 
 	update: function() {

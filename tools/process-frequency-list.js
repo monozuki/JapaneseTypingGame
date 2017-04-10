@@ -14,7 +14,7 @@ const dictionaryPath = {
 };
 
 const words = [];
-const map = {};
+const pairs = [];
 
 const contents = fs.readFileSync(inputPath).toString();
 
@@ -24,11 +24,10 @@ contents.split('\n').forEach(function (line) {
 
 kuromoji.builder(dictionaryPath).build(function (err, tokenizer) {
 
-    for (let i = 0; i < 1500; i++) {
+    for (let i = 0; i < words.length; i++) {
         const word = words[i].trim();
-        if (wanakana.isHiragana(word)) {
-            // map does not allow duplicate keys
-            // switch to tuples later
+        if (wanakana.isHiragana(word) || wanakana.isKatakana(word)) {
+            // skip words that are only hiragana or katakana
             continue;
         }
 
@@ -39,9 +38,9 @@ kuromoji.builder(dictionaryPath).build(function (err, tokenizer) {
                 // wanakana.toHiragana does not work if the input contains a 長音符 (this thing: ー )
                 continue;
             }
-            map[word] = reading;
+            pairs.push([word, reading]);
         }
     }
 
-    fs.writeFileSync(outputPath, JSON.stringify(map));
+    fs.writeFileSync(outputPath, JSON.stringify(pairs));
 });

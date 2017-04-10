@@ -20,9 +20,10 @@ game.state.add('play', playState);
 
 game.state.start('boot');
 
-var app = new Vue({
+var vue = new Vue({
 	el: '#overlay',
 	data: {
-		start: menuState.start
+		start: menuState.start, 
+		numEntries: 100
 	}
 });

@@ -32,6 +32,19 @@
 		#buttons {
 			top: 400px;
 		}
+		#settings {
+			top: 430px;
+			display: flex;
+    		align-items: center;
+    		justify-content: center;
+		}
+		#settings .text {
+			font-size: 14pt;
+		}
+		#settings .el-input-number {
+			width: 70px;
+			margin: 5px;
+		}
     </style>
 </head>
 
@@ -46,6 +59,12 @@
 				<el-button class="grid-content" type="primary" size="large" v-on:click="start">
 					Start
 				</el-button>
+			</el-row>
+
+			<el-row id="settings">
+				<div class="text">Study the </div>
+				<el-input-number v-model="numEntries" :min="1" :max="2000" :controls="false" style="width: 70px;"></el-input-number>
+				<div class="text"> most frequent words.</div>
 			</el-row>
 		</div>
 
